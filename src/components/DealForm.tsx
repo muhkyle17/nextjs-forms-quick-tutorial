@@ -11,6 +11,8 @@ const DealForm = () => {
             name='name'
             id='name'
             className='w-full p-2 rounded-md text-gray-900'
+            required
+            minLength={5}
           />
         </div>
 
@@ -23,6 +25,9 @@ const DealForm = () => {
             name='link'
             id='link'
             className='w-full p-2 rounded-md text-gray-900'
+            required
+            pattern='[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?'
+            title='Please enter a valid URL'
           />
         </div>
 
@@ -35,6 +40,8 @@ const DealForm = () => {
             name='couponCode'
             id='couponCode'
             className='w-full p-2 rounded-md text-gray-900'
+            required
+            minLength={5}
           />
         </div>
 
@@ -43,9 +50,12 @@ const DealForm = () => {
             Discount (%)
           </label>
           <input
-            type='text'
+            type='number'
             name='discount'
             id='discount'
+            min={1}
+            max={100}
+            required
             className='w-full p-2 rounded-md text-gray-900'
           />
         </div>
