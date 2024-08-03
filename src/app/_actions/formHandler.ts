@@ -27,8 +27,8 @@ export const formHandlerAction = async (
     console.log(validated.error, 'validated.error')
     const errors = convertZodErrors(validated.error)
     console.log(errors, 'errors')
-    return { errors }
+    return { errors, data: validated.data }
   } else {
-    return { successMsg: 'Deal added successfully', errors: {} }
+    return { successMsg: 'Deal added successfully', errors: {}, data: {} }
   }
 }

@@ -36,7 +36,7 @@ const DealForm = () => {
             id='name'
             className='w-full p-2 rounded-md text-gray-900'
             required
-            // minLength={5}
+            defaultValue={serverState.data?.name}
           />
           <div className='min-h-8'>
             {serverState.errors?.name && (
@@ -57,6 +57,7 @@ const DealForm = () => {
             required
             pattern='[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?'
             // title='Please enter a valid URL'
+            defaultValue={serverState.data?.link}
           />
           <div className='min-h-8'>
             {serverState.errors?.link && (
@@ -76,6 +77,7 @@ const DealForm = () => {
             className='w-full p-2 rounded-md text-gray-900'
             required
             // minLength={5}
+            defaultValue={serverState.data?.couponCode}
           />
           <div className='min-h-8'>
             {serverState.errors?.couponCode && (
@@ -96,6 +98,7 @@ const DealForm = () => {
             max={100}
             required
             className='w-full p-2 rounded-md text-gray-900'
+            defaultValue={serverState.data?.discount}
           />
           <div className='min-h-8'>
             {serverState.errors?.discount && (
