@@ -1,26 +1,26 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { useFormState } from 'react-dom'
 import toast from 'react-hot-toast'
 
 import { StringMap } from '../app/_types/deal'
+import { DealFormState } from '../app/_types/deal'
 import { formHandlerAction } from '../app/_actions/formHandler'
 
+const initialState: DealFormState<StringMap> = {}
+
 const DealForm = () => {
-  const [errors, setErrors] = useState<StringMap>({})
   const formRef = useRef<HTMLFormElement>(null)
 
-  const handleFormSubmit = async (formData: FormData) => {
-    const { errors, successMsg } = await formHandlerAction(formData)
-    if (successMsg) {
-      toast.success('Deal submitted!')
-      formRef.current?.reset()
-    }
-    setErrors(errors || {})
-  }
+  const [serverState, formAction] = useFormState(formHandlerAction, initialState)
+
+  useEffect(() => {
+    console.log(serverState)
+  }, [serverState])
 
   return (
-    <form className='w-full' action={handleFormSubmit} ref={formRef}>
+    <form className='w-full' action={formAction} ref={formRef}>
       <div className='flex flex-col gap-y-4'>
         <div>
           <label className='block' htmlFor='name'>
@@ -35,7 +35,9 @@ const DealForm = () => {
             // minLength={5}
           />
           <div className='min-h-8'>
-            {errors?.name && <small className='text-red-400'>{errors.name}</small>}
+            {serverState.errors?.name && (
+              <small className='text-red-400'>{serverState.errors?.name}</small>
+            )}
           </div>
         </div>
 
@@ -53,7 +55,9 @@ const DealForm = () => {
             // title='Please enter a valid URL'
           />
           <div className='min-h-8'>
-            {errors?.link && <small className='text-red-400'>{errors.link}</small>}
+            {serverState.errors?.link && (
+              <small className='text-red-400'>{serverState.errors?.link}</small>
+            )}
           </div>
         </div>
 
@@ -70,7 +74,9 @@ const DealForm = () => {
             // minLength={5}
           />
           <div className='min-h-8'>
-            {errors?.couponCode && <small className='text-red-400'>{errors.couponCode}</small>}
+            {serverState.errors?.couponCode && (
+              <small className='text-red-400'>{serverState.errors?.couponCode}</small>
+            )}
           </div>
         </div>
 
@@ -88,7 +94,9 @@ const DealForm = () => {
             className='w-full p-2 rounded-md text-gray-900'
           />
           <div className='min-h-8'>
-            {errors?.discount && <small className='text-red-400'>{errors.discount}</small>}
+            {serverState.errors?.discount && (
+              <small className='text-red-400'>{serverState.errors?.discount}</small>
+            )}
           </div>
         </div>
         <button>Submit</button>
