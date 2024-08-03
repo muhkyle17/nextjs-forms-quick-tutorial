@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import { useFormState } from 'react-dom'
 import toast from 'react-hot-toast'
 
@@ -16,7 +16,10 @@ const DealForm = () => {
   const [serverState, formAction] = useFormState(formHandlerAction, initialState)
 
   useEffect(() => {
-    console.log(serverState)
+    if (serverState.successMsg) {
+      toast.success(serverState.successMsg)
+      formRef.current?.reset()
+    }
   }, [serverState])
 
   return (
