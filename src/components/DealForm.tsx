@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import toast from 'react-hot-toast'
 
 import { StringMap } from '../app/_types/deal'
@@ -8,18 +8,19 @@ import { formHandlerAction } from '../app/_actions/formHandler'
 
 const DealForm = () => {
   const [errors, setErrors] = useState<StringMap>({})
+  const formRef = useRef<HTMLFormElement>(null)
 
   const handleFormSubmit = async (formData: FormData) => {
     const { errors, successMsg } = await formHandlerAction(formData)
-    if (errors) {
-      setErrors(errors)
-    } else if (successMsg) {
+    if (successMsg) {
       toast.success('Deal submitted!')
+      formRef.current?.reset()
     }
+    setErrors(errors || {})
   }
 
   return (
-    <form className='w-full' action={handleFormSubmit}>
+    <form className='w-full' action={handleFormSubmit} ref={formRef}>
       <div className='flex flex-col gap-y-4'>
         <div>
           <label className='block' htmlFor='name'>

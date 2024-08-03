@@ -20,6 +20,6 @@ export const formHandlerAction = async (formData: FormData): Promise<DealFormSta
     console.log(errors, 'errors')
     return { errors }
   } else {
-    return { successMsg: 'Deal added successfully' }
+    return { successMsg: 'Deal added successfully', errors: {} }
   }
 }
