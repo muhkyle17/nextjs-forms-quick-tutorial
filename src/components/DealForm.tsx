@@ -7,6 +7,7 @@ import toast from 'react-hot-toast'
 import { StringMap } from '../app/_types/deal'
 import { DealFormState } from '../app/_types/deal'
 import { formHandlerAction } from '../app/_actions/formHandler'
+import SubmitButton from '../components/SubmitButton'
 
 const initialState: DealFormState<StringMap> = {}
 
@@ -102,7 +103,7 @@ const DealForm = () => {
             )}
           </div>
         </div>
-        <button>Submit</button>
+        <SubmitButton />
       </div>
     </form>
   )
