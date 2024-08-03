@@ -1,6 +1,8 @@
+import { formHandlerAction } from '../app/_actions/formHandler'
+
 const DealForm = () => {
   return (
-    <form className='w-full'>
+    <form className='w-full' action={formHandlerAction}>
       <div className='flex flex-col gap-y-4'>
         <div>
           <label className='block' htmlFor='name'>

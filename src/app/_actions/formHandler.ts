@@ -15,7 +15,10 @@ export const formHandlerAction = async (formData: FormData): Promise<DealFormSta
   const validated = dealSchema.safeParse(unvalidatedDeal)
 
   if (!validated.success) {
-    return {}
+    console.log(validated.error, 'validated.error')
+    const errors = convertZodErrors(validated.error)
+    console.log(errors, 'errors')
+    return { errors }
   } else {
     return { successMsg: 'Deal added successfully' }
   }
