@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { StringMap } from '../app/_types/deal'
+import toast from 'react-hot-toast'
 
+import { StringMap } from '../app/_types/deal'
 import { formHandlerAction } from '../app/_actions/formHandler'
 
 const DealForm = () => {
@@ -12,6 +13,8 @@ const DealForm = () => {
     const { errors, successMsg } = await formHandlerAction(formData)
     if (errors) {
       setErrors(errors)
+    } else if (successMsg) {
+      toast.success('Deal submitted!')
     }
   }
 
