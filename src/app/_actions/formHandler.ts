@@ -4,6 +4,10 @@ import { dealSchema } from '../_schemas/deal'
 import { DealFormState, StringMap } from '../_types/deal'
 import { convertZodErrors } from '../_utils/errors'
 
+export const sleep = (ms: number) => {
+  new Promise(resolve => setTimeout(resolve, ms))
+}
+
 export const formHandlerAction = async (
   prevState: DealFormState<StringMap>,
   formData: FormData
@@ -14,6 +18,8 @@ export const formHandlerAction = async (
     couponCode: formData.get('couponCode'),
     discount: formData.get('discount'),
   }
+
+  await sleep(10000)
 
   const validated = dealSchema.safeParse(unvalidatedDeal)
 
