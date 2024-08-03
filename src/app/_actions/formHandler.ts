@@ -12,11 +12,11 @@ export const formHandlerAction = async (
   prevState: DealFormState<StringMap>,
   formData: FormData
 ): Promise<DealFormState<StringMap>> => {
-  const unvalidatedDeal = {
-    name: formData.get('name'),
-    link: formData.get('link'),
-    couponCode: formData.get('couponCode'),
-    discount: formData.get('discount'),
+  const unvalidatedDeal: StringMap = {
+    name: formData.get('name') as string,
+    link: formData.get('link') as string,
+    couponCode: formData.get('couponCode') as string,
+    discount: formData.get('discount') as string,
   }
 
   await sleep(10000)
@@ -27,7 +27,7 @@ export const formHandlerAction = async (
     console.log(validated.error, 'validated.error')
     const errors = convertZodErrors(validated.error)
     console.log(errors, 'errors')
-    return { errors, data: validated.data }
+    return { errors, data: unvalidatedDeal }
   } else {
     return { successMsg: 'Deal added successfully', errors: {}, data: {} }
   }
